@@ -5,6 +5,8 @@ public class VillagerBehavior : MonoBehaviour {
     Vector3 mTarget = new Vector3(-3, -5, 0);
     public float mSpeed = 0;
     private bool mEvil;
+    private Global mGlobal;
+    private CameraShake mCameraShake;
 
     public GameObject mBurstManager;
 
@@ -12,8 +14,9 @@ public class VillagerBehavior : MonoBehaviour {
     void Start()
     {
         initTarget();
-        initColor();
-
+        //initColor();
+        mGlobal = GameObject.Find("Global").GetComponent<Global>();
+        mCameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
     }
 
     private void initColor()
@@ -32,10 +35,21 @@ public class VillagerBehavior : MonoBehaviour {
 
     void OnMouseDown()
     {
-        print("Click");
         var go = GameObject.Instantiate(mBurstManager);
         go.transform.position = this.transform.position;
-        go.GetComponent<BurstManager>().mColor = this.GetComponent<SpriteRenderer>().color;
+
+        if(mEvil)
+        {
+            go.GetComponent<BurstManager>().mColor = Color.red;
+            mGlobal.GainScore();
+        }
+        else
+        {
+            go.GetComponent<BurstManager>().mColor = Color.blue;
+            mGlobal.LooseLife();
+            mCameraShake.Shake();
+        }
+
         Destroy(this.gameObject);
     }
 
@@ -67,6 +81,27 @@ public class VillagerBehavior : MonoBehaviour {
 
     void AtEnd()
     {
+        if(this.mEvil)
+        {
+            mGlobal.LooseLife();
+            mCameraShake.Shake();
+        }
+        else
+        {
+            mGlobal.GainScore();
+        }
         Destroy(this.gameObject);
+    }
+
+    public void Reveal()
+    {
+        if(mEvil)
+        {
+            this.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+        else
+        {
+            this.GetComponent<SpriteRenderer>().color = Color.blue;
+        }
     }
 }
