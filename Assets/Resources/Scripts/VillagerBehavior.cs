@@ -53,6 +53,7 @@ public class VillagerBehavior : MonoBehaviour {
         {
             go.GetComponent<BurstManager>().mColor = Color.red;
             mGlobal.GainScore();
+            mGlobal.MakeKill();
         }
         else
         {

@@ -14,6 +14,9 @@ public class Global : MonoBehaviour {
     private float mCurrentPower;
 
     private float mVillagerCount;
+    private float mKillCount;
+
+    private ObjectiveManager.Objectives mCurrentObjective = ObjectiveManager.Objectives.Save20;
 
 	// Use this for initialization
 	void Start () {
@@ -42,17 +45,37 @@ public class Global : MonoBehaviour {
     public void SaveVillager()
     {
         mVillagerCount++;
-        if(mVillagerCount > 20)
+        if(mCurrentObjective == ObjectiveManager.Objectives.Save20)
         {
-            GameObject.Find("Main Camera").SendMessage("ObjectiveAcheived");
-        }
+            if(mVillagerCount == 20)
+            {
+                GameObject.Find("Main Camera").SendMessage("SaveObjectiveAcheived");
+            }
+        }        
     }
 
     public void GainScore()
     {
         mScore++;
-        print("" + (5 * Time.deltaTime));
         deltaPower(1);
+    }
+
+    public void SetObjectiveToKill()
+    {
+        mKillCount = 0;
+        mCurrentObjective = ObjectiveManager.Objectives.Kill30;
+    }
+
+    public void MakeKill()
+    {
+        mKillCount++;
+        if (mCurrentObjective == ObjectiveManager.Objectives.Kill30)
+        {
+            if (mKillCount == 30)
+            {
+                GameObject.Find("Main Camera").SendMessage("KillObjectiveAcheived");
+            }
+        } 
     }
 
     public int GetScore()
