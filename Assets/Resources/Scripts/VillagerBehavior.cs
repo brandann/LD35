@@ -8,6 +8,7 @@ public class VillagerBehavior : MonoBehaviour {
     public bool mEvil;
     private Global mGlobal;
     private CameraShake mCameraShake;
+    public GameObject HeroGameObject;
 
     public GameObject mBurstManager;
 
@@ -18,6 +19,7 @@ public class VillagerBehavior : MonoBehaviour {
         initColor();
         mGlobal = GameObject.Find("Global").GetComponent<Global>();
         mCameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
+        HeroGameObject = GameObject.Find("Hero");
     }
 
     private void initColor()
@@ -38,10 +40,15 @@ public class VillagerBehavior : MonoBehaviour {
 
     void OnMouseDown()
     {
+        HeroGameObject.SendMessage("Shoot", this.gameObject);
+    }
+
+    public void Kill()
+    {
         var go = GameObject.Instantiate(mBurstManager);
         go.transform.position = this.transform.position;
 
-        if(mEvil)
+        if (mEvil)
         {
             go.GetComponent<BurstManager>().mColor = Color.red;
             mGlobal.GainScore();

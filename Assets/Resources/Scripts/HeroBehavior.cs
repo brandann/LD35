@@ -5,6 +5,7 @@ public class HeroBehavior : MonoBehaviour {
 
     private Global mGlobal;
     public GameObject mVisionObject;
+    public GameObject mArrowPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -26,4 +27,12 @@ public class HeroBehavior : MonoBehaviour {
             mVisionObject.SetActive(false);
         }
 	}
+
+    public void Shoot(GameObject go)
+    {
+        var arrow = GameObject.Instantiate(mArrowPrefab);
+        arrow.transform.position = this.transform.position;
+        var AB = arrow.GetComponent<ArrowBehavior>();
+        AB.mTargetGameObject = go;
+    }
 }
