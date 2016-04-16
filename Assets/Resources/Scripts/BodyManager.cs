@@ -31,4 +31,15 @@ public class BodyManager : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void MakeEvil()
+    {
+        print("EVIL");
+        BodyA[0].GetComponent<SpriteRenderer>().color = Color.red;
+        BodyA[1].GetComponent<SpriteRenderer>().color = Color.red;
+        BodyB[0].GetComponent<SpriteRenderer>().color = Color.red;
+        BodyB[1].GetComponent<SpriteRenderer>().color = Color.red;
+        BodyC[0].GetComponent<SpriteRenderer>().color = Color.red;
+        BodyC[1].GetComponent<SpriteRenderer>().color = Color.red;
+    }
 }

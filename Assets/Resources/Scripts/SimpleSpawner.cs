@@ -25,7 +25,7 @@ public class SimpleSpawner : MonoBehaviour {
             mDuration -= mDecreaseRate;
             var go = GameObject.Instantiate(mSpawnedPrefab);
             var dirX = Random.Range(-mRadius, mRadius);
-            var dirY = Random.Range(0, mRadius);
+            var dirY = Random.Range(mRadiusObjectX.transform.position.y, mRadius);
             Vector3 dir = new Vector3(dirX, dirY, 0);
             dir.Normalize();
             go.transform.position = this.transform.position + (dir * mRadius);

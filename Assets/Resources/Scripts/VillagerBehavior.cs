@@ -11,6 +11,7 @@ public class VillagerBehavior : MonoBehaviour {
     public GameObject HeroGameObject;
 
     public GameObject mBurstManager;
+    public GameObject mBody;
 
     // Use this for initialization
     void Start()
@@ -100,6 +101,7 @@ public class VillagerBehavior : MonoBehaviour {
         else
         {
             mGlobal.GainScore();
+            mGlobal.SaveVillager();
         }
         Destroy(this.gameObject);
     }
@@ -109,6 +111,8 @@ public class VillagerBehavior : MonoBehaviour {
         if(mEvil)
         {
             this.GetComponent<SpriteRenderer>().color = Color.red;
+            mBody.SendMessage("MakeEvil");
+            this.mSpeed = 1.5f;
         }
         else
         {

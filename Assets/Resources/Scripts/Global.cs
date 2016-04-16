@@ -4,19 +4,19 @@ using System.Collections;
 
 public class Global : MonoBehaviour {
 
-    private int mLives;
-    public int StartLives;
+    private int mLives=5;
     public Text mLivesText;
 
     private int mScore;
     public Text mScoreText;
 
-    public float initPower;
+    private float initPower = 100;
     private float mCurrentPower;
+
+    private float mVillagerCount;
 
 	// Use this for initialization
 	void Start () {
-        mLives = StartLives;
         mScore = 0;
         mCurrentPower = initPower;
 	}
@@ -39,9 +39,20 @@ public class Global : MonoBehaviour {
         }
     }
 
+    public void SaveVillager()
+    {
+        mVillagerCount++;
+        if(mVillagerCount > 20)
+        {
+            GameObject.Find("Main Camera").SendMessage("ObjectiveAcheived");
+        }
+    }
+
     public void GainScore()
     {
         mScore++;
+        print("" + (5 * Time.deltaTime));
+        deltaPower(1);
     }
 
     public int GetScore()
@@ -57,6 +68,7 @@ public class Global : MonoBehaviour {
     public void deltaPower(float d)
     {
         mCurrentPower += d;
+        mCurrentPower = Mathf.Clamp(mCurrentPower, 0, initPower);
     }
 
     public float GetPower()
