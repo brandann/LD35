@@ -22,7 +22,6 @@ public class VisionBehavior : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        print("COL");
         if (coll.gameObject.tag == VILLAGE_TAG)
             coll.gameObject.SendMessage("Reveal");
     }
