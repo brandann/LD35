@@ -3,6 +3,7 @@ using System.Collections;
 
 public class VillagerBehavior : MonoBehaviour {
     Vector3 mTarget = new Vector3(-3, -5, 0);
+    Vector3 mDirection = new Vector3(0, 0, 0);
     public float mSpeed = 0;
     public bool mEvil;
     private Global mGlobal;
@@ -68,13 +69,14 @@ public class VillagerBehavior : MonoBehaviour {
             mTarget = new Vector3(sign * 3, -5, 0);
         }
 
-        this.transform.up = mTarget - this.transform.position;
+        mDirection = mTarget - this.transform.position;
+        mDirection.Normalize();
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = this.transform.position + (mSpeed * this.transform.up) * Time.deltaTime;
+        this.transform.position = this.transform.position + (mSpeed * mDirection) * Time.deltaTime;
         if ((this.transform.position - mTarget).magnitude < .1f)
         {
             AtEnd();
