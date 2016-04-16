@@ -7,6 +7,7 @@ public class SimpleSpawner : MonoBehaviour {
     public float mDuration;
     public GameObject mSpawnedPrefab;
     public GameObject mRadiusObjectX;
+    public float mDecreaseRate;
 
     private float mRadius;
 
@@ -21,10 +22,10 @@ public class SimpleSpawner : MonoBehaviour {
 	    if(Time.timeSinceLevelLoad - mStartTime > mDuration)
         {
             mStartTime = Time.timeSinceLevelLoad;
-            mDuration -= .01f;
+            mDuration -= mDecreaseRate;
             var go = GameObject.Instantiate(mSpawnedPrefab);
             var dirX = Random.Range(-mRadius, mRadius);
-            var dirY = Random.Range(-2, mRadius);
+            var dirY = Random.Range(0, mRadius);
             Vector3 dir = new Vector3(dirX, dirY, 0);
             dir.Normalize();
             go.transform.position = this.transform.position + (dir * mRadius);

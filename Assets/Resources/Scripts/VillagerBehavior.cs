@@ -4,7 +4,7 @@ using System.Collections;
 public class VillagerBehavior : MonoBehaviour {
     Vector3 mTarget = new Vector3(-3, -5, 0);
     public float mSpeed = 0;
-    private bool mEvil;
+    public bool mEvil;
     private Global mGlobal;
     private CameraShake mCameraShake;
 
@@ -14,7 +14,7 @@ public class VillagerBehavior : MonoBehaviour {
     void Start()
     {
         initTarget();
-        //initColor();
+        initColor();
         mGlobal = GameObject.Find("Global").GetComponent<Global>();
         mCameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
     }
@@ -22,6 +22,7 @@ public class VillagerBehavior : MonoBehaviour {
     private void initColor()
     {
         mEvil = (Random.Range(0, 3) == 0) ? true : false;
+        /*
         var SR = this.gameObject.GetComponent<SpriteRenderer>();
         if (mEvil)
         {
@@ -31,6 +32,7 @@ public class VillagerBehavior : MonoBehaviour {
         {
             SR.color = Color.blue;
         }
+        */
     }
 
     void OnMouseDown()
