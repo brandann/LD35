@@ -10,7 +10,7 @@ public class Global : MonoBehaviour {
     private int mScore;
     public Text mScoreText;
 
-    private float initPower = 100;
+    private float initPower = 200;
     private float mCurrentPower;
 
     private float mVillagerCount;
@@ -22,6 +22,8 @@ public class Global : MonoBehaviour {
     public Text GameOverText;
 
     public static bool killMessage = false;
+
+    public AudioClip LooseAudio;
 
 	// Use this for initialization
 	void Start () {
@@ -43,6 +45,7 @@ public class Global : MonoBehaviour {
             GameoverImage.enabled = true;
             GameOverText.enabled = true;
             GameoverImage.gameObject.SetActive(true);
+            GameObject.Find("Audio").GetComponent<AudioSource>().PlayOneShot(LooseAudio);
         }
         else
         {

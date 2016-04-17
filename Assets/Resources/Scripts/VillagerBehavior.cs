@@ -14,6 +14,8 @@ public class VillagerBehavior : MonoBehaviour {
     public GameObject mBody;
 
     public GameObject killusGO;
+    public AudioClip mAudioBAAAAH;
+    public AudioClip mAudioARG;
 
     private bool mRevealed = false;
 
@@ -61,6 +63,7 @@ public class VillagerBehavior : MonoBehaviour {
                 go.GetComponent<BurstManager>().mColor = Color.red;
                 mGlobal.GainScore();
                 mGlobal.MakeKill();
+                GameObject.Find("Audio").GetComponent<AudioSource>().PlayOneShot(mAudioBAAAAH);
             }
             else
             {
@@ -68,6 +71,7 @@ public class VillagerBehavior : MonoBehaviour {
                 mGlobal.LooseLife();
                 mCameraShake.Shake();
                 mGlobal.KilledVillager();
+                GameObject.Find("Audio").GetComponent<AudioSource>().PlayOneShot(mAudioARG);
             }
         }
         else

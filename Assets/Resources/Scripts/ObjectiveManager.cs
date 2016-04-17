@@ -20,6 +20,8 @@ public class ObjectiveManager : MonoBehaviour {
     public Image WinImage;
     public Text WinText;
 
+    public AudioClip WinAudio;
+
 	// Use this for initialization
 	void Start () {
         mStartTime = Time.timeSinceLevelLoad;
@@ -80,6 +82,7 @@ public class ObjectiveManager : MonoBehaviour {
                 WinImage.enabled = true;
                 WinText.enabled = true;
                 WinImage.gameObject.SetActive(true);
+                GameObject.Find("Audio").GetComponent<AudioSource>().PlayOneShot(WinAudio);
             }
             
         }

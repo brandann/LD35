@@ -11,6 +11,8 @@ public class StartButton : MonoBehaviour {
 
     public GameObject BM;
 
+    public AudioClip mAudioARG;
+
 	// Use this for initialization
 	void Start () {
 	    
@@ -35,6 +37,6 @@ public class StartButton : MonoBehaviour {
         var go = GameObject.Instantiate(BM);
         go.transform.position = this.transform.position;
         go.GetComponent<BurstManager>().mColor = Color.yellow;
-        
+        GameObject.Find("Audio").GetComponent<AudioSource>().PlayOneShot(mAudioARG);
     }
 }
