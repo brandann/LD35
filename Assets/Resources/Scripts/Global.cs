@@ -21,6 +21,8 @@ public class Global : MonoBehaviour {
     public Image GameoverImage;
     public Text GameOverText;
 
+    public static bool killMessage = false;
+
 	// Use this for initialization
 	void Start () {
         mScore = 0;
@@ -37,16 +39,39 @@ public class Global : MonoBehaviour {
         mLives--;
         if(mLives == 0)
         {
-            //print("Game Over!!");
             Time.timeScale = 0;
             GameoverImage.enabled = true;
             GameOverText.enabled = true;
             GameoverImage.gameObject.SetActive(true);
-            GameoverImage.SendMessage("StartTimer", 6);
         }
         else
         {
 
+        }
+    }
+
+    public void KilledVillager()
+    {
+        /*if(!killMessage)
+        {
+            killMessage = true;
+            var gos = GameObject.FindGameObjectsWithTag("Villager");
+            for(int i = 0; i < gos.Length; i++)
+            {
+                if(Random.Range(0,2) == 0)
+                {
+                    gos[i].SendMessage("ShowKillMessage");
+                }
+            }
+        }*/
+
+        var gos = GameObject.FindGameObjectsWithTag("Villager");
+        for (int i = 0; i < gos.Length; i++)
+        {
+            if (Random.Range(0, 2) == 0)
+            {
+                gos[i].SendMessage("ShowKillMessage");
+            }
         }
     }
 
@@ -100,7 +125,7 @@ public class Global : MonoBehaviour {
     public void deltaPower(float d)
     {
         mCurrentPower += d;
-        mCurrentPower = Mathf.Clamp(mCurrentPower, 0, initPower);
+        mCurrentPower = Mathf.Clamp(mCurrentPower, -5, initPower);
     }
 
     public float GetPower()

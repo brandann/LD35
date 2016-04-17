@@ -20,12 +20,10 @@ public class HeroBehavior : MonoBehaviour {
             {
                 mGlobal.deltaPower(-1);
                 mVisionObject.SetActive(true);
+                return;
             }
         }
-        else
-        {
-            mVisionObject.SetActive(false);
-        }
+        mVisionObject.SetActive(false);
 	}
 
     public void Shoot(GameObject go)

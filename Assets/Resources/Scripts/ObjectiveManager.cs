@@ -17,6 +17,9 @@ public class ObjectiveManager : MonoBehaviour {
 
     public GameObject mSpawner;
 
+    public Image WinImage;
+    public Text WinText;
+
 	// Use this for initialization
 	void Start () {
         mStartTime = Time.timeSinceLevelLoad;
@@ -65,7 +68,20 @@ public class ObjectiveManager : MonoBehaviour {
             {
                 ObjectiveTextBox.enabled = false;
                 ObjectiveText.enabled = false;
+                index++;
             }
+        }
+        else if(index == 4)
+        {
+            var gos = GameObject.FindGameObjectsWithTag("Villager");
+            if (gos.Length == 0)
+            {
+                Time.timeScale = 0;
+                WinImage.enabled = true;
+                WinText.enabled = true;
+                WinImage.gameObject.SetActive(true);
+            }
+            
         }
 	}
 
@@ -94,7 +110,7 @@ public class ObjectiveManager : MonoBehaviour {
         ObjectiveText.text = mObjectiveList[index];
         mStartTime = Time.timeSinceLevelLoad;
         mSpawner.SetActive(false);
-        KillAllShifters();
+        //KillAllShifters();
     }
 
     public void KillObjectiveAcheived()
@@ -105,7 +121,7 @@ public class ObjectiveManager : MonoBehaviour {
         ObjectiveText.text = mObjectiveList[index];
         mStartTime = Time.timeSinceLevelLoad;
         mSpawner.SetActive(false);
-        KillAllShifters();
+        //KillAllShifters();
     }
 
     void KillAllVillagers()

@@ -13,6 +13,10 @@ public class VillagerBehavior : MonoBehaviour {
     public GameObject mBurstManager;
     public GameObject mBody;
 
+    public GameObject killusGO;
+
+    private bool mRevealed = false;
+
     // Use this for initialization
     void Start()
     {
@@ -63,6 +67,7 @@ public class VillagerBehavior : MonoBehaviour {
                 go.GetComponent<BurstManager>().mColor = Color.blue;
                 mGlobal.LooseLife();
                 mCameraShake.Shake();
+                mGlobal.KilledVillager();
             }
         }
         else
@@ -77,6 +82,14 @@ public class VillagerBehavior : MonoBehaviour {
             }
         }
         Destroy(this.gameObject);
+    }
+
+    public void ShowKillMessage()
+    {
+        if (!mRevealed)
+        {
+            killusGO.SendMessage("ShowDontKillUs");
+        }
     }
 
     public bool IsEvil()
@@ -136,6 +149,7 @@ public class VillagerBehavior : MonoBehaviour {
             mBody.GetComponent<SpriteRenderer>().enabled = true;
             mBody.SendMessage("HideBody");
             //mBody.SetActive(false);
+            mRevealed = true;
         }
         else
         {
