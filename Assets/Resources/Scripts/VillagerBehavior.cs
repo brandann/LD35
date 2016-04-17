@@ -44,25 +44,44 @@ public class VillagerBehavior : MonoBehaviour {
         HeroGameObject.SendMessage("Shoot", this.gameObject);
     }
 
-    public void Kill()
+    public void Kill(bool score = true)
     {
         var go = GameObject.Instantiate(mBurstManager);
         go.transform.position = this.transform.position;
 
-        if (mEvil)
+
+        if (score)
         {
-            go.GetComponent<BurstManager>().mColor = Color.red;
-            mGlobal.GainScore();
-            mGlobal.MakeKill();
+            if (mEvil)
+            {
+                go.GetComponent<BurstManager>().mColor = Color.red;
+                mGlobal.GainScore();
+                mGlobal.MakeKill();
+            }
+            else
+            {
+                go.GetComponent<BurstManager>().mColor = Color.blue;
+                mGlobal.LooseLife();
+                mCameraShake.Shake();
+            }
         }
         else
         {
-            go.GetComponent<BurstManager>().mColor = Color.blue;
-            mGlobal.LooseLife();
-            mCameraShake.Shake();
+            if (mEvil)
+            {
+                go.GetComponent<BurstManager>().mColor = Color.red;
+            }
+            else
+            {
+                go.GetComponent<BurstManager>().mColor = Color.blue;
+            }
         }
-
         Destroy(this.gameObject);
+    }
+
+    public bool IsEvil()
+    {
+        return mEvil;
     }
 
     private void initTarget()
@@ -111,13 +130,16 @@ public class VillagerBehavior : MonoBehaviour {
     {
         if(mEvil)
         {
-            this.GetComponent<SpriteRenderer>().color = Color.red;
+            mBody.GetComponent<SpriteRenderer>().color = Color.red;
             mBody.SendMessage("MakeEvil");
             this.mSpeed = 1.5f;
+            mBody.GetComponent<SpriteRenderer>().enabled = true;
+            mBody.SendMessage("HideBody");
+            //mBody.SetActive(false);
         }
         else
         {
-            this.GetComponent<SpriteRenderer>().color = Color.blue;
+            //this.GetComponent<SpriteRenderer>().color = Color.blue;
         }
     }
 }

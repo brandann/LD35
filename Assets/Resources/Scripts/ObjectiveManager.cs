@@ -67,10 +67,12 @@ public class ObjectiveManager : MonoBehaviour {
                 ObjectiveText.enabled = false;
             }
         }
-
-
-
 	}
+
+    private void StartMassicareObjective()
+    {
+        // NOT USED RIGHT NOW
+    }
 
     private void StartKillObjective()
     {
@@ -81,6 +83,7 @@ public class ObjectiveManager : MonoBehaviour {
         mStartTime = Time.timeSinceLevelLoad;
         mSpawner.SetActive(true);
         GameObject.Find("Global").SendMessage("SetObjectiveToKill");
+        mSpawner.GetComponent<SimpleSpawner>().mDuration = 1;
     }
 
     public void SaveObjectiveAcheived()
@@ -91,6 +94,7 @@ public class ObjectiveManager : MonoBehaviour {
         ObjectiveText.text = mObjectiveList[index];
         mStartTime = Time.timeSinceLevelLoad;
         mSpawner.SetActive(false);
+        KillAllShifters();
     }
 
     public void KillObjectiveAcheived()
@@ -101,6 +105,7 @@ public class ObjectiveManager : MonoBehaviour {
         ObjectiveText.text = mObjectiveList[index];
         mStartTime = Time.timeSinceLevelLoad;
         mSpawner.SetActive(false);
+        KillAllShifters();
     }
 
     void KillAllVillagers()
@@ -108,7 +113,19 @@ public class ObjectiveManager : MonoBehaviour {
         var gos = GameObject.FindGameObjectsWithTag("Villager");
         for(int i = 0;  i <gos.Length; i++)
         {
-            Destroy(gos[i].gameObject);
+            gos[i].SendMessage("Kill", false);
+        }
+    }
+
+    void KillAllShifters()
+    {
+        var gos = GameObject.FindGameObjectsWithTag("Villager");
+        for (int i = 0; i < gos.Length; i++)
+        {
+            if(gos[i].GetComponent<VillagerBehavior>().IsEvil())
+            {
+                gos[i].SendMessage("Kill", false);
+            }
         }
     }
 }

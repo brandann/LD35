@@ -18,6 +18,9 @@ public class Global : MonoBehaviour {
 
     private ObjectiveManager.Objectives mCurrentObjective = ObjectiveManager.Objectives.Save20;
 
+    public Image GameoverImage;
+    public Text GameOverText;
+
 	// Use this for initialization
 	void Start () {
         mScore = 0;
@@ -35,6 +38,11 @@ public class Global : MonoBehaviour {
         if(mLives == 0)
         {
             //print("Game Over!!");
+            Time.timeScale = 0;
+            GameoverImage.enabled = true;
+            GameOverText.enabled = true;
+            GameoverImage.gameObject.SetActive(true);
+            GameoverImage.SendMessage("StartTimer", 6);
         }
         else
         {
@@ -64,6 +72,7 @@ public class Global : MonoBehaviour {
     {
         mKillCount = 0;
         mCurrentObjective = ObjectiveManager.Objectives.Kill30;
+        mCurrentPower = initPower;
     }
 
     public void MakeKill()
@@ -108,5 +117,11 @@ public class Global : MonoBehaviour {
     public bool HasPower()
     {
         return mCurrentPower > 0;
+    }
+
+    public void LoadMenu()
+    {
+        Time.timeScale = 1;
+        Application.LoadLevel("Menu");
     }
 }

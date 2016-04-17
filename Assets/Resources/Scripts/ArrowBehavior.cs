@@ -16,6 +16,7 @@ public class ArrowBehavior : MonoBehaviour {
         if(mTargetGameObject == null)
         {
             Destroy(this.gameObject);
+            return;
         }
         this.transform.up = mTargetGameObject.transform.position - this.transform.position;
         this.transform.position += Time.deltaTime * mSpeed * this.transform.up;
@@ -25,7 +26,7 @@ public class ArrowBehavior : MonoBehaviour {
     {
         if(coll.gameObject == mTargetGameObject)
         {
-            coll.gameObject.SendMessage("Kill");
+            coll.gameObject.SendMessage("Kill", true);
             Destroy(this.gameObject);
         }
     }
