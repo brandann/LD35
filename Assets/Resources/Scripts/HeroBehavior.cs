@@ -7,6 +7,8 @@ public class HeroBehavior : MonoBehaviour {
     public GameObject mVisionObject;
     public GameObject mArrowPrefab;
 
+    public AudioClip mChicka;
+
 	// Use this for initialization
 	void Start () {
         mGlobal = GameObject.Find("Global").GetComponent<Global>();

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class VillagerBehavior : MonoBehaviour {
-    Vector3 mTarget = new Vector3(-3, -5, 0);
+    Vector3 mTarget = new Vector3(30, -5.25f, 0);
     Vector3 mDirection = new Vector3(0, 0, 0);
     public float mSpeed = 0;
     public bool mEvil;
@@ -16,6 +16,8 @@ public class VillagerBehavior : MonoBehaviour {
     public GameObject killusGO;
     public AudioClip mAudioBAAAAH;
     public AudioClip mAudioARG;
+    public AudioClip mGoatEE;
+    public AudioClip mChicka;
 
     private bool mRevealed = false;
 
@@ -58,7 +60,14 @@ public class VillagerBehavior : MonoBehaviour {
 
         if (score)
         {
-            if (mEvil)
+            if(mEvil && !mRevealed)
+            {
+                go.GetComponent<BurstManager>().mColor = Color.red;
+                mGlobal.GainScore();
+                mGlobal.MakeKill();
+                GameObject.Find("Audio").GetComponent<AudioSource>().PlayOneShot(mGoatEE);
+            }
+            else if (mEvil)
             {
                 go.GetComponent<BurstManager>().mColor = Color.red;
                 mGlobal.GainScore();
@@ -147,13 +156,14 @@ public class VillagerBehavior : MonoBehaviour {
     {
         if(mEvil)
         {
-            mBody.GetComponent<SpriteRenderer>().color = Color.red;
+            //mBody.GetComponent<SpriteRenderer>().color = Color.red;
             mBody.SendMessage("MakeEvil");
             this.mSpeed = 1.5f;
             mBody.GetComponent<SpriteRenderer>().enabled = true;
             mBody.SendMessage("HideBody");
             //mBody.SetActive(false);
             mRevealed = true;
+            GameObject.Find("Audio").GetComponent<AudioSource>().PlayOneShot(mChicka);
         }
         else
         {

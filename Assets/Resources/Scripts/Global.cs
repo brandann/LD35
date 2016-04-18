@@ -41,7 +41,7 @@ public class Global : MonoBehaviour {
         mLives--;
         if(mLives == 0)
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             GameoverImage.enabled = true;
             GameOverText.enabled = true;
             GameoverImage.gameObject.SetActive(true);
@@ -55,19 +55,6 @@ public class Global : MonoBehaviour {
 
     public void KilledVillager()
     {
-        /*if(!killMessage)
-        {
-            killMessage = true;
-            var gos = GameObject.FindGameObjectsWithTag("Villager");
-            for(int i = 0; i < gos.Length; i++)
-            {
-                if(Random.Range(0,2) == 0)
-                {
-                    gos[i].SendMessage("ShowKillMessage");
-                }
-            }
-        }*/
-
         var gos = GameObject.FindGameObjectsWithTag("Villager");
         for (int i = 0; i < gos.Length; i++)
         {
@@ -93,7 +80,7 @@ public class Global : MonoBehaviour {
     public void GainScore()
     {
         mScore++;
-        deltaPower(1);
+        deltaPower(5);
     }
 
     public void SetObjectiveToKill()
@@ -150,6 +137,7 @@ public class Global : MonoBehaviour {
     public void LoadMenu()
     {
         Time.timeScale = 1;
+        Destroy(GameObject.Find("Audio"));
         Application.LoadLevel("Menu");
     }
 }

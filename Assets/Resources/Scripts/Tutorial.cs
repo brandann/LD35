@@ -12,10 +12,13 @@ public class Tutorial : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	    TutorialText = new List<string>();
-        TutorialText.Add("Shaman, a great plague is sweeping the towns! The Villagers from the neighboring tribes are flocking to the sanctuary...");
-        TutorialText.Add("The plague is allowing the evil spirits of our ancestors to disguise as our brethren...");
-        TutorialText.Add("Use your ancient Shaman powers of <b><color=teal>“RIGHT-CLICKING”</color></b> (whatever that means) to reveal our foes!");
-        TutorialText.Add("Look with your <b><color=purple>“MOUSE”</color></b> and <b><color=teal>“LEFT-CLICK”</color></b> to destroy the evil among us. Don’t ask me what that means, I’m just a simple gatherer...");
+        TutorialText.Add("Shaman, A Great Plague Is Sweeping The Towns! The Villagers From The Neighboring Tribes Are Flocking To The Sanctuary...");
+        TutorialText.Add("The Plague Is Allowing The Evil Spirits Of Our Ancestors to Disguise As Our Brethren...");
+        TutorialText.Add("Use Your Ancient Shaman Powers Of <b><color=teal>“RIGHT-CLICKING”</color></b> To Reveal Our Foes!");
+        TutorialText.Add("Aim With Your <b><color=purple>“MOUSE”</color></b>");
+        TutorialText.Add("<b><color=teal>“LEFT-CLICK”</color></b> To Destroy The Evil Shape Shifting Goats Among Us...");
+        TutorialText.Add("Don’t Ask Me What That Means, I’m Just A Simple Gatherer...");
+        TutorialText.Add("Don't Kill Your Own People. They Will Turn On You!");
 
         mText.GetComponent<Text>().text = TutorialText[index];
 	}

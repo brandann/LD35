@@ -78,11 +78,12 @@ public class ObjectiveManager : MonoBehaviour {
             var gos = GameObject.FindGameObjectsWithTag("Villager");
             if (gos.Length == 0)
             {
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
                 WinImage.enabled = true;
                 WinText.enabled = true;
                 WinImage.gameObject.SetActive(true);
-                GameObject.Find("Audio").GetComponent<AudioSource>().PlayOneShot(WinAudio);
+                //GameObject.Find("Audio").GetComponent<AudioSource>().volume = 0.5f;
+                //GameObject.Find("Audio").GetComponent<AudioSource>().PlayOneShot(WinAudio);
             }
             
         }
@@ -103,6 +104,7 @@ public class ObjectiveManager : MonoBehaviour {
         mSpawner.SetActive(true);
         GameObject.Find("Global").SendMessage("SetObjectiveToKill");
         mSpawner.GetComponent<SimpleSpawner>().mDuration = 1;
+        mDuration = 4;
     }
 
     public void SaveObjectiveAcheived()
